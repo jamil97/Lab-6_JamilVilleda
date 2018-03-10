@@ -208,13 +208,13 @@ public class Principal_Donas extends javax.swing.JFrame {
 
         jt_listarproductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Precio Venta"
+                "Nombre", "Precio Venta", "Precio Costo"
             }
         ));
         jt_listarproductos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -710,13 +710,16 @@ public class Principal_Donas extends javax.swing.JFrame {
 
         DefaultTableModel modelo = (DefaultTableModel) jt_listarproductos.getModel();
         for (int i = 0; i < inv.getProducto().size(); i++) {
-            Object[] newrow = {inv.getProducto().get(i).getNombre(), inv.getProducto().get(i).getPrecioventa(),};
+            Object[] newrow = {inv.getProducto().get(i).getNombre(), inv.getProducto().get(i).getPrecioventa(), inv.getProducto().get(i).getPreciocosto()};
             modelo.addRow(newrow);
         }
     }//GEN-LAST:event_bt_listarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
+if(jt_listarproductos.getSelectedRow()>=0){
+            //capturar modelo de la tabla
+            DefaultTableModel modelo=(DefaultTableModel) jt_listarproductos.getModel();
+}
 
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -730,7 +733,6 @@ public class Principal_Donas extends javax.swing.JFrame {
             modelo.removeRow(jt_listarproductos.getSelectedRow());
             jt_listarproductos.setModel(modelo);
     }//GEN-LAST:event_bt_eliminarMouseClicked
-
     }
 
     /**
