@@ -91,6 +91,7 @@ public class Principal_Donas extends javax.swing.JFrame {
         tf_cai = new javax.swing.JTextField();
         tf_fechaactual = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Inventario = new javax.swing.JMenu();
         jmi_agregarproductos = new javax.swing.JMenuItem();
@@ -207,15 +208,20 @@ public class Principal_Donas extends javax.swing.JFrame {
 
         jt_listarproductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Productos", "", ""
+                "Nombre", "Precio Venta"
             }
         ));
+        jt_listarproductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_listarproductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_listarproductos);
 
         bt_listar.setText("Listar Productos");
@@ -226,6 +232,11 @@ public class Principal_Donas extends javax.swing.JFrame {
         });
 
         bt_eliminar.setText("Eliminar Productos");
+        bt_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_eliminarMouseClicked(evt);
+            }
+        });
 
         jButton1.setText("Modificar Producto");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -482,6 +493,9 @@ public class Principal_Donas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab/pkg6_jamilvileda/donas.png"))); // NOI18N
+        jLabel19.setText("jLabel19");
+
         Inventario.setText("Inventario");
 
         jmi_agregarproductos.setText("Agregar Productos");
@@ -549,11 +563,16 @@ public class Principal_Donas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 418, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -688,35 +707,31 @@ public class Principal_Donas extends javax.swing.JFrame {
     }//GEN-LAST:event_RegistroVentaActionPerformed
 
     private void bt_listarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_listarMouseClicked
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jt_listarproductos.getModel();
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int seleccion = fileChooser.showOpenDialog(this);
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-            File dir = fileChooser.getSelectedFile();
-            
-            try {
-               BufferedReader bw = new BufferedReader(new FileReader(dir));
-               
-               
-               
-               
-            } catch (Exception e) {
-            }
-//            File[] files = dir.listFiles();
-//            for (File file : files) {
-//                if (file.isFile()) {
-//                 
-//                }
-//            }
+        for (int i = 0; i < inv.getProducto().size(); i++) {
+            Object[] newrow = {inv.getProducto().get(i).getNombre(), inv.getProducto().get(i).getPrecioventa(),};
+            modelo.addRow(newrow);
         }
     }//GEN-LAST:event_bt_listarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
-        
+
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jt_listarproductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_listarproductosMouseClicked
+
+    }//GEN-LAST:event_jt_listarproductosMouseClicked
+
+    private void bt_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_eliminarMouseClicked
+        if (jt_listarproductos.getSelectedRow() >= 0) {
+            DefaultTableModel modelo = (DefaultTableModel) jt_listarproductos.getModel();
+            modelo.removeRow(jt_listarproductos.getSelectedRow());
+            jt_listarproductos.setModel(modelo);
+    }//GEN-LAST:event_bt_eliminarMouseClicked
+
+    }
 
     /**
      * @param args the command line arguments
@@ -779,6 +794,7 @@ public class Principal_Donas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
